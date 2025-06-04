@@ -9,13 +9,14 @@ import CircularProgressBar from "./skills"; // Import the Skills component
 export default function Home() {
   return (
     <main
-      className=" text-white bg-black
-      min-h-screen px-15 py-5"
+      className=" text-white bg-black min-h-screen py-5
+      mobile:px-5
+      tab:px-15"
     >
       {/*NAVIGATION SECTION*/}
       <section className="  font-poppins pb-5">
         {/*NAVIGATION BAR*/}
-        <nav className=" flex justify-between items-center text-xl pb-3">
+        <nav className=" flex justify-between items-center tab:text-xl pb-3">
           <h1 className=" cursor-pointer hover:underline hover:underline-offset-5 hover:decoration-2">
             <a href="#">Pasindu Dissanayake</a>
           </h1>
@@ -44,27 +45,38 @@ export default function Home() {
 
       {/*HERO SECTION*/}
       <section className="">
-        <div className=" flex justify-between">
+        <div className=" flex justify-between mobile:max-md:block tab:max-laptop:block">
           {/*IMAGE*/}
           <Image
             src={profileImg}
             alt="profile-image"
-            className=" w-130 h-131 pt-1"
+            className=" mobile:max-tab:w-100 mobile:max-tab:h-101 mobile:max-tab:relative mobile:max-tab:right-35
+                        tab:max-laptop:w-110 tab:max-laptop:h-111 tab:max-laptop:relative tab:max-laptop:right-35
+                        medium:max-lg:w-110 medium:max-lg:h-111 medium:max-lg:relative medium:max-lg:right-10
+                        lg:max-laptop:w-110 lg:max-laptop:h-111 lg:max-laptop:relative lg:max-laptop:right-0
+                        laptop:w-130 laptop:h-131 
+                        pt-1"
           />
           {/*ABOUT-ME*/}
-          <div className=" flex flex-col gap-8 items-end">
+          <div className=" flex flex-col items-end
+                           gap-5
+                           laptop:gap-8 
+                           mobile:max-tab:absolute mobile:max-tab:top-25 mobile:max-tab:right-5 mobile:max-tab:w-3/5
+                           tab:max-laptop:absolute tab:max-laptop:top-25 tab:max-laptop:right-15 tab:max-laptop:w-3/5">
             <div
-              className=" pt-8 pb-2 text-right font-antonio font-light 
-              text-[85px]
-              leading-20
+              className=" pt-3 text-right font-antonio font-light 
+                          mobile:text-[60px] mobile:leading-13.5 mobile:pb-2
+                          tab:text-[70px] tab:leading-17
+                          laptop:text-[85px] laptop:pt-8 laptop:pb-2 laptop:leading-20
+              
               tracking-tight bg-gradient-to-b from-white to-neutral-600 inline-block text-transparent bg-clip-text"
             >
-              <span className=" text-[70px]">I'm</span>
-              <span className=" text-[80]"> Pasindu</span>
+              <span className=" mobile:text-[40px] tab:text-[50px] laptop:text-[70px]">I'm</span>
+              <span className=" mobile:text-[50px] tab:text-[60px] laptop:text-[80px]"> Pasindu</span>
               <br />
-              <span className=" text-[62px]">FULL-STACK</span>
+              <span className=" mobile:text-[42px] tab:text-[52px] laptop:text-[62px]">FULL-STACK</span>
               <b className=" font-extrabold"> DEVELOPER</b>
-              <br />&<span className=" text-[62px]"> creative</span>
+              <br />&<span className=" mobile:text-[42px] tab:text-[52px] laptop:text-[62px]"> creative</span>
               <br />
               <b className=" font-extrabold">DESIGNER</b>
             </div>
