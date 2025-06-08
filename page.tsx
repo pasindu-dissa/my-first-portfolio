@@ -10,48 +10,67 @@ import Collapse from "./collapse"; // Import the Collapse component
 export default function Home() {
   return (
     <main
-      className=" text-white bg-black min-h-screen py-5
+      className=" text-white bg-black min-h-screen
       mobile:max-mobileLg:px-0
       mobile:px-5
       tab:px-15"
     >
       {/*NAVIGATION SECTION*/}
-      <section className="  font-poppins pb-5 mobile:max-mobileLg:px-5">
-        {/*NAVIGATION BAR*/}
-        <nav className=" flex justify-between items-center tab:text-xl pb-3">
-          <h1 className=" cursor-pointer hover:underline hover:underline-offset-5 hover:decoration-2">
-            <a href="#">Pasindu Dissanayake</a>
-          </h1>
-          <ul className=" flex gap-4">
-            <li className=" cursor-pointer opacity-50 transition delay-50 duratioen-200 eas-in-out hover:opacity-100">
-              home
+      <section className="  font-poppins flex justify-between items-center fixed py-5 gap-10 z-50 bg-black">
+        {/* Logo + Name */}
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 border-2 border-white rounded-full" />
+          <div className="leading-4 text-white font-semibold">
+            <p>Pasindu</p>
+            <p>Dissanayake</p>
+          </div>
+        </div>
+        <nav className="flex justify-between gap-10 items-center px-5 py-3 rounded-full backdrop-blur-md bg-gradient-to-r from-blue-400/30 via-purple-400/30 to-teal-300/30 border border-white/20 shadow-lg">
+          {/* Nav Links */}
+          <ul className="flex gap-6 text-white text-sm font-medium">
+            <li className="cursor-pointer hover:underline underline-offset-4 transition-opacity opacity-70 hover:opacity-100">
+              Projects
             </li>
-            <li className=" cursor-pointer opacity-50 transition delay-50 duration-200 hover:opacity-100">
-              skills
+            <li className="cursor-pointer hover:underline underline-offset-4 transition-opacity opacity-70 hover:opacity-100">
+              About
             </li>
-            <li className=" cursor-pointer opacity-50 transition delay-50 duration-200 hover:opacity-100">
-              projects
+            <li className="cursor-pointer hover:underline underline-offset-4 transition-opacity opacity-70 hover:opacity-100">
+              Blog
+            </li>
+            <li className="cursor-pointer hover:underline underline-offset-4 transition-opacity opacity-70 hover:opacity-100">
+              Contact
             </li>
           </ul>
-          <div className=" flex items-center gap-6">
-            <BsMoonStarsFill />
-            <h1
+
+          {/* Icon */}
+          <div className="w-10 h-10 flex items-center justify-center rounded-full border border-white/50 bg-white/20 hover:bg-white/30 transition">
+            <BsMoonStarsFill className="text-white text-lg" />
+          </div>
+        </nav>
+        <h1
+          className=" border-2 p-1 cursor-pointer transition delay-50 duratioen-200 eas-in-out
+        hover:bg-white hover:border-2 hover:border-white hover:text-black"
+        >
+          let's connect
+        </h1>
+      </section>
+
+      {/* <h1
               className=" border-2 p-1 cursor-pointer transition delay-50 duratioen-200 eas-in-out
             hover:bg-white hover:border-2 hover:border-white hover:text-black"
             >
               let's connect
-            </h1>
-          </div>
-        </nav>
-      </section>
+            </h1> */}
 
       {/*HERO SECTION*/}
-      <section className="">
-        <div className=" flex justify-between 
+      <section className=" pt-20">
+        <div
+          className=" flex justify-between 
                         mobile:max-mobileLg:h-screen mobile:max-mobileLg:bg-fixed
                         mobile:max-mobileLg:bg-[url(./assets/me.png)] mobile:max-mobileLg:bg-cover 
                         mobile:max-mobileLg:bg-center mobile:max-mobileLg:bg-no-repeat
-                        tab:max-laptop:block">
+                        tab:max-laptop:block"
+        >
           {/*IMAGE*/}
           <Image
             src={profileImg}
@@ -65,13 +84,15 @@ export default function Home() {
                         pt-1"
           />
           {/*ABOUT-ME*/}
-          <div className=" flex flex-col items-end
+          <div
+            className=" flex flex-col items-end
                            gap-5
                            laptop:gap-8
                            mobile:max-mobileLg:backdrop-brightness-50
                            mobile:max-mobileLg:px-5
                            mobileLg:max-tab:absolute mobileLg:max-tab:top-25 mobileLg:max-tab:right-5 mobileLg:max-tab:w-3/5
-                           tab:max-laptop:absolute tab:max-laptop:top-25 tab:max-laptop:right-15 tab:max-laptop:w-3/5">
+                           tab:max-laptop:absolute tab:max-laptop:top-25 tab:max-laptop:right-15 tab:max-laptop:w-3/5"
+          >
             <div
               className=" pt-3 text-right font-antonio font-light
                           mobile:max-mobileLg:text-white 
@@ -82,12 +103,23 @@ export default function Home() {
               
               tracking-tight bg-gradient-to-b from-white to-neutral-600 inline-block text-transparent bg-clip-text"
             >
-              <span className=" mobile:max-mobileLg:text-[60px] mobile:text-[40px] tab:text-[50px] laptop:text-[70px]">I'm</span>
-              <span className=" mobile:max-mobileLg:text-[70px] mobile:text-[50px] tab:text-[60px] laptop:text-[80px]"> Pasindu</span>
+              <span className=" mobile:max-mobileLg:text-[60px] mobile:text-[40px] tab:text-[50px] laptop:text-[70px]">
+                I'm
+              </span>
+              <span className=" mobile:max-mobileLg:text-[70px] mobile:text-[50px] tab:text-[60px] laptop:text-[80px]">
+                {" "}
+                Pasindu
+              </span>
               <br />
-              <span className="mobile:max-mobileLg:text-[60px] mobile:text-[42px] tab:text-[52px] laptop:text-[62px]">FULL-STACK</span>
+              <span className="mobile:max-mobileLg:text-[60px] mobile:text-[42px] tab:text-[52px] laptop:text-[62px]">
+                FULL-STACK
+              </span>
               <b className=" font-extrabold"> DEVELOPER</b>
-              <br />&<span className="mobile:max-mobileLg:text-[65px] mobile:text-[42px] tab:text-[52px] laptop:text-[62px]"> creative</span>
+              <br />&
+              <span className="mobile:max-mobileLg:text-[65px] mobile:text-[42px] tab:text-[52px] laptop:text-[62px]">
+                {" "}
+                creative
+              </span>
               <br />
               <b className=" font-extrabold">DESIGNER</b>
             </div>
@@ -165,14 +197,26 @@ export default function Home() {
           {/*MORE-SKILLS-BOXES*/}
           <div className=" flex justify-between">
             <div className="py-10 opacity-65 text-left">
-              <span className="inline-block border-1 px-2 py-0.5 m-2">Python</span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                Python
+              </span>
               <span className="inline-block border-1 px-2 py-0.5 m-2">C++</span>
               <span className="inline-block border-1 px-2 py-0.5 m-2">C#</span>
-              <span className="inline-block border-1 px-2 py-0.5 m-2">Java</span>
-              <span className="inline-block border-1 px-2 py-0.5 m-2">MySQL</span>
-              <span className="inline-block border-1 px-2 py-0.5 m-2">mongoDB</span>
-              <span className="inline-block border-1 px-2 py-0.5 m-2">express.js</span>
-              <span className="inline-block border-1 px-2 py-0.5 m-2">Next.js</span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                Java
+              </span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                MySQL
+              </span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                mongoDB
+              </span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                express.js
+              </span>
+              <span className="inline-block border-1 px-2 py-0.5 m-2">
+                Next.js
+              </span>
             </div>
           </div>
         </div>
@@ -183,21 +227,27 @@ export default function Home() {
         <div className="w-full">
           {/* Topic */}
           <div className="flex items-center gap-4 min-[900px]:w-3/5">
-              <h1 className="text-4xl font-bold whitespace-nowrap">About</h1>
-              <div className="flex-grow h-px block w-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
+            <h1 className="text-4xl font-bold whitespace-nowrap">About</h1>
+            <div className="flex-grow h-px block w-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded"></div>
           </div>
           {/* Components */}
           <div className="flex flex-row gap-4 flex-wrap justify-center py-10">
             <div className="w-full sm:w-80">
               <Collapse title="My Journey">
                 <p>
-                  I'm a passionate developer with a love for crafting digital experiences. From tinkering with code in my teens to building scalable web apps, my journey has been fueled by curiosity and creativity.
+                  I'm a passionate developer with a love for crafting digital
+                  experiences. From tinkering with code in my teens to building
+                  scalable web apps, my journey has been fueled by curiosity and
+                  creativity.
                 </p>
               </Collapse>
             </div>
             <div className="w-full sm:w-80">
               <Collapse title="Skills">
-                <p>Proficient in modern web technologies with a knack for problem-solving.</p>
+                <p>
+                  Proficient in modern web technologies with a knack for
+                  problem-solving.
+                </p>
                 <ul className="list-disc pl-5 mt-2">
                   <li>React, TypeScript, Node.js</li>
                   <li>Tailwind CSS, UI/UX Design</li>
