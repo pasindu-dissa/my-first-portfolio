@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState, useMemo, useRef } from "react";
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 
 // Define the interface for each progress bar's configuration
 interface ProgressBarConfig {
@@ -18,7 +18,7 @@ interface CircularProgressBarProps {
   animationDuration?: number;
   clockwise?: boolean;
   backgroundTrackColor?: string;
-  staggerDelay?: number; // New prop for staggering animations
+  staggerDelay?: number;
 }
 
 const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
@@ -28,8 +28,8 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   strokeWidth = 15,
   animationDuration = 1000,
   clockwise = true,
-  backgroundTrackColor = "#E5E7EB",
-  staggerDelay = 200 // Default stagger delay of 200ms between progress bars
+  backgroundTrackColor = '#E5E7EB',
+  staggerDelay = 200,
 }) => {
   const [currentPercentages, setCurrentPercentages] = useState<number[]>(
     progressBars.map(() => 0)
@@ -72,7 +72,7 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
           observer.disconnect();
         }
       },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
+      { threshold: 0.1 }
     );
 
     if (ref.current) {
@@ -83,94 +83,126 @@ const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   }, [validatedPercentages, staggerDelay, progressBars.length]);
 
   return (
-    <div ref={ref} className="relative inline-flex mr-10 mb-10 items-center justify-center">
-      <svg
-        width={size}
-        height={size}
-        className="transform transition-transform duration-300 hover:scale-105"
-      >
-        <defs>
-          {progressBars.map((bar, index) => (
-            <linearGradient
-              key={gradientIds[index]}
-              id={gradientIds[index]}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
+    <div ref={ref} className="flex flex-col items-center">
+      {/* Horizontal bars for mobile:max-mobilelg */}
+      <div className="block max-[639px]:block sm:hidden w-full">
+        {progressBars.map((bar, index) => (
+          <div key={index} className="mb-4 w-full">
+            <div className="flex justify-between items-center mb-1">
+              <span className="text-xl font-medium text-gray-700 dark:text-gray-300">
+                {bar.customText || `${currentPercentages[index]}%`}
+              </span>
+            </div>
+            <div
+              className="w-full bg-[#ffffff25] rounded-full"
+              style={{ height: `${strokeWidth}px` }}
             >
-              {(bar.gradientColors || ["#3B82F6", "#10B981"]).map(
-                (color, colorIndex) => (
-                  <stop
-                    key={colorIndex}
-                    offset={`${
-                      (colorIndex / ((bar.gradientColors?.length || 2) - 1)) * 100
-                    }%`}
-                    stopColor={color}
-                  />
-                )
-              )}
-            </linearGradient>
-          ))}
-        </defs>
+              <div
+                className="rounded-full transition-all duration-700"
+                style={{
+                  width: `${currentPercentages[index]}%`,
+                  height: `${strokeWidth}px`,
+                  background: `linear-gradient(to right, ${
+                    bar.gradientColors?.join(', ') || '#3B82F6, #10B981'
+                  })`,
+                }}
+              />
+            </div>
+          </div>
+        ))}
+      </div>
 
-        {/* Background Tracks */}
-        {progressBars.map((_, index) => {
-          const radius = baseRadius - index * radiusStep;
-          return (
-            <circle
-              key={`bg-${index}`}
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke={backgroundTrackColor}
-              strokeWidth={strokeWidth}
-              className="dark:opacity-20"
-            />
-          );
-        })}
+      {/* CIRCULAR PROGRESS BAR SECTION */}
+      <div className="max-[640px]:hidden relative flex items-center justify-center">
+        <svg
+          width={size}
+          height={size}
+          className="transform transition-transform duration-300 hover:scale-105"
+        >
+          <defs>
+            {progressBars.map((bar, index) => (
+              <linearGradient
+                key={gradientIds[index]}
+                id={gradientIds[index]}
+                x1="0%"
+                y1="0%"
+                x2="100%"
+                y2="0%"
+              >
+                {(bar.gradientColors || ['#3B82F6', '#10B981']).map(
+                  (color, colorIndex) => (
+                    <stop
+                      key={colorIndex}
+                      offset={`${
+                        (colorIndex / ((bar.gradientColors?.length || 2) - 1)) *
+                        100
+                      }%`}
+                      stopColor={color}
+                    />
+                  )
+                )}
+              </linearGradient>
+            ))}
+          </defs>
 
-        {/* Progress Circles */}
-        {progressBars.map((bar, index) => {
-          const radius = baseRadius - index * radiusStep;
-          const circumference = 2 * Math.PI * radius;
-          const strokeDashoffset =
-            circumference - (currentPercentages[index] / 100) * circumference;
+          {/* Background Tracks */}
+          {progressBars.map((_, index) => {
+            const radius = baseRadius - index * radiusStep;
+            return (
+              <circle
+                key={`bg-${index}`}
+                cx={center}
+                cy={center}
+                r={radius}
+                fill="none"
+                stroke={backgroundTrackColor}
+                strokeWidth={strokeWidth}
+                className="dark:opacity-20"
+              />
+            );
+          })}
 
-          const progressStyle: React.CSSProperties = {
-            strokeDasharray: circumference,
-            strokeDashoffset: strokeDashoffset,
-            transition: `stroke-dashoffset ${animationDuration}ms ease-in-out`,
-            transform: clockwise ? "rotate(-90deg)" : "rotate(90deg)",
-            transformOrigin: "center"
-          };
+          {/* Progress Circles */}
+          {progressBars.map((bar, index) => {
+            const radius = baseRadius - index * radiusStep;
+            const circumference = 2 * Math.PI * radius;
+            const strokeDashoffset =
+              circumference - (currentPercentages[index] / 100) * circumference;
 
-          return (
-            <circle
-              key={`progress-${index}`}
-              cx={center}
-              cy={center}
-              r={radius}
-              fill="none"
-              stroke={`url(#${gradientIds[index]})`}
-              strokeWidth={strokeWidth}
-              strokeLinecap="round"
-              style={progressStyle}
-              role="progressbar"
-              aria-valuenow={currentPercentages[index]}
-              aria-valuemin={0}
-              aria-valuemax={100}
-            />
-          );
-        })}
-      </svg>
+            const progressStyle: React.CSSProperties = {
+              strokeDasharray: circumference,
+              strokeDashoffset: strokeDashoffset,
+              transition: `stroke-dashoffset ${animationDuration}ms ease-in-out`,
+              transform: clockwise ? 'rotate(-90deg)' : 'rotate(90deg)',
+              transformOrigin: 'center',
+            };
 
-      {/* Centered Text (shows text for the innermost progress bar) */}
-      <div className="absolute flex flex-col items-center justify-center">
-        <span className="text-2xl font-bold text-gray-700 dark:text-gray-300">
-          {progressBars[0]?.customText || `${currentPercentages[0]}%`}
-        </span>
+            return (
+              <circle
+                key={`progress-${index}`}
+                cx={center}
+                cy={center}
+                r={radius}
+                fill="none"
+                stroke={`url(#${gradientIds[index]})`}
+                strokeWidth={strokeWidth}
+                strokeLinecap="round"
+                style={progressStyle}
+                role="progressbar"
+                aria-valuenow={currentPercentages[index]}
+                aria-valuemin={0}
+                aria-valuemax={100}
+              />
+            );
+          })}
+        </svg>
+
+        {/* Centered Text (shows text for the innermost progress bar) */}
+        <div className="absolute flex flex-col items-center justify-center">
+          <span className="text-2xl font-bold text-gray-700 dark:text-gray-300">
+            {progressBars[0]?.customText || `${currentPercentages[0]}%`}
+          </span>
+        </div>
       </div>
     </div>
   );
