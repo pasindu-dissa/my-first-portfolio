@@ -3,15 +3,24 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image'; // We'll use this for the avatar
 import { BsMoonStarsFill } from 'react-icons/bs';
-import { HiMenu, HiX } from 'react-icons/hi';
+import {
+  HiMenu,
+  HiX,
+  HiOutlineHome,
+  HiOutlineCog,
+  HiOutlineCollection,
+  HiOutlineBriefcase,
+  HiOutlineLogout,
+} from 'react-icons/hi';
 
-// It's good practice to manage links in an array
+// --- Updated navLinks array to include icons ---
 const navLinks = [
-  { name: 'home', href: '#home' },
-  { name: 'skills', href: '#skills' },
-  { name: 'services', href: '#services' },
-  { name: 'projects', href: '#projects' },
+  { name: 'home', href: '#home', icon: HiOutlineHome },
+  { name: 'skills', href: '#skills', icon: HiOutlineCog },
+  { name: 'services', href: '#services', icon: HiOutlineBriefcase },
+  { name: 'projects', href: '#projects', icon: HiOutlineCollection },
 ];
 
 const Navbar: React.FC = () => {
@@ -23,7 +32,7 @@ const Navbar: React.FC = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
-  }
+  };
 
   return (
     <nav className="font-poppins relative z-50">
@@ -62,47 +71,69 @@ const Navbar: React.FC = () => {
             aria-label="Open menu"
             className="text-2xl"
           >
-            {isOpen ? <HiX /> : <HiMenu />}
+            <HiMenu />
           </button>
         </div>
       </div>
 
-      {/* --- Mobile Menu with Glassmorphism Effect --- */}
+      {/* --- Mobile Menu --- */}
+      {/* Overlay */}
       <div
-        className={`fixed inset-0 w-full h-full transition-all duration-300 ease-in-out ${
-          isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+        className={`fixed inset-0 bg-black/40 transition-opacity duration-300 ${
+          isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={closeMenu}
+      ></div>
+
+      {/* Menu Card */}
+      <div
+        className={`fixed top-5 right-5 h-3/4 w-4/5 max-w-sm bg-white/10 backdrop-blur-xl border-l border-white/20 shadow-2xl flex flex-col p-6 transition-transform duration-300 ease-in-out ${
+          isOpen ? 'translate-x-0' : 'translate-x-[120%]'
         }`}
       >
-        {/* Overlay */}
-        <div 
-          className="absolute inset-0 bg-black/30 backdrop-blur-lg"
-          onClick={closeMenu}
-        ></div>
-
-        {/* Menu Content */}
-        <div className="relative flex flex-col items-center justify-center h-full text-white">
-          <ul className="flex flex-col items-center gap-8 text-2xl">
-            {navLinks.map((link) => (
-              <li
-                key={link.name}
-                className="cursor-pointer opacity-80 transition-opacity duration-200 hover:opacity-100"
-              >
-                <Link href={link.href} onClick={closeMenu}>
-                  {link.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-          <div className="mt-12 flex flex-col items-center gap-8">
-            <BsMoonStarsFill className="cursor-pointer text-2xl" />
-            <Link
-              href="#connect"
-              onClick={closeMenu}
-              className="border-2 p-2 px-4 cursor-pointer transition-all duration-200 ease-in-out bg-white text-black hover:bg-transparent hover:text-white"
-            >
-              let's connect
-            </Link>
+        {/* Menu Header with Close Button */}
+        <div className="flex items-center justify-between mb-10">
+          <div className="flex items-center gap-3">
+             {/* This is the updated part */}
+            <div>
+              <Link href="#about" onClick={closeMenu}>
+                <p className="font-semibold text-white hover:underline cursor-pointer">
+                  Pasindu Dissanayake
+                </p>
+              </Link>
+            </div>
           </div>
+          <button onClick={closeMenu} aria-label="Close menu" className="text-3xl text-white/80 hover:text-white">
+            <HiX />
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <ul className="flex flex-col gap-2">
+          {navLinks.map((link) => (
+            <li key={link.name}>
+              <Link
+                href={link.href}
+                onClick={closeMenu}
+                className="flex items-center gap-4 p-3 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition-all"
+              >
+                <link.icon className="text-xl" />
+                <span className="text-lg">{link.name}</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Footer Link */}
+        <div className="mt-auto">
+          <Link
+            href="#connect"
+            onClick={closeMenu}
+            className="flex items-center gap-4 p-3 rounded-lg text-white/80 hover:bg-white/10 hover:text-white transition-all"
+          >
+            <HiOutlineLogout className="text-xl" />
+            <span className="text-lg">Let's Connect</span>
+          </Link>
         </div>
       </div>
     </nav>
