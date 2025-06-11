@@ -198,26 +198,58 @@ export default function Home() {
       </section>
 
       {/* LET'S CONNECT FINAL SECTION */}
-      <section id="connect" className="font-poppins text-center py-30 px-5 bg-gradient-to-br from-black via-neutral-900 to-black">
-        <div className="max-w-2xl mx-auto bg-neutral-800 p-10 shadow-2xl border border-neutral-600">
-          <h2 className="text-4xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-pink-500 to-red-400 bg-clip-text text-transparent">
-            Let's Connect
-          </h2>
-          <p className="text-lg opacity-75 mb-6">
+      <section
+        id="connect"
+        className="font-poppins relative w-full overflow-hidden text-center py-20 md:py-32 "
+      >
+        {/* Background Image with Border Radius */}
+        <div
+          className="absolute inset-0 bg-cover bg-center rounded-4xl" /* Added rounded-lg */
+          style={{ backgroundImage: 'url(/images/aurora.jpeg)' }}
+        >
+          {/* ... overlay ... */}
+        </div>
+
+        {/* The Glassmorphism Card */}
+        <div className="relative max-w-sm sm:max-w-md md:max-w-2xl mx-auto flex flex-col items-start gap-6 md:gap-8 p-8 md:p-12
+                    bg-white/10 backdrop-blur-xl
+                    border border-white/20
+                     shadow-2xl text-left"> {/* Removed items-center, added text-left, and responsive max-w */}
+
+          <p className="font-dm_sans text-3xl font-semibold text-white max-w-lg">
             Whether it's a project, collaboration, or just a chat about design
-            and tech — I'm just a message away.
+            and tech -
           </p>
-          <div className="flex justify-center gap-6 text-2xl mb-6">
-            <FaLinkedinIn className="cursor-pointer hover:text-blue-500 transition" />
-            <FaGithub className="cursor-pointer hover:text-gray-400 transition" />
-            <FaFacebook className="cursor-pointer hover:text-blue-600 transition" />
+          <p className=" text-xl text-white/70">I'm just a message away</p>
+
+          {/* Social Links and Let's Talk button on one line */}
+          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4 sm:gap-0"> {/* Added w-full and responsive flex */}
+            {/* Enhanced Social Icons */}
+            <div className="flex gap-4 text-2xl">
+              <a href="#" aria-label="LinkedIn" className="p-3 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                <FaLinkedinIn />
+              </a>
+              <a href="#" aria-label="GitHub" className="p-3 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                <FaGithub />
+              </a>
+              <a href="#" aria-label="Facebook" className="p-3 rounded-full text-white/70 hover:text-white hover:bg-white/10 transition-all duration-300">
+                <FaFacebook />
+              </a>
+            </div>
+
+            {/* Updated CTA Button */}
+            <a
+              href="#" // Replace with your contact link or mailto
+              className="inline-block px-8 py-3
+                      font-semibold text-black bg-white rounded-full
+                      shadow-lg
+                      transition-all duration-300 ease-in-out
+                      hover:scale-105 hover:shadow-xl"
+            >
+              Let's Talk
+            </a>
           </div>
-          <a
-            href="#"
-            className="inline-block mt-4 px-6 py-3 bg-white text-black font-semibold hover:bg-transparent hover:text-white border-2 border-white transition"
-          >
-            Let's Talk
-          </a>
+
         </div>
       </section>
 
