@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --breakpoint-laptop: 1171px;
+  --breakpoint-medium: 880px;
+  --breakpoint-tab: 769px;
+  --breakpoint-mobileLg: 448px;
+  --breakpoint-mobile: 300px;
+}
+
+/* src/app/globals.css */
+
+/* Add this at the end of your file */
+
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* We create a utility class to apply this animation */
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Add these to your src/app/globals.css */
+
+/* Slower float animation */
+@keyframes float-slow {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0px); }
+}
+.animate-float-slow {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+/* Rotation-based animation */
+@keyframes float-rotate {
+  0% { transform: translateY(0px) rotate(-10deg); }
+  50% { transform: translateY(-5px) rotate(20deg); }
+  100% { transform: translateY(0px) rotate(-10deg); }
+}
+
+.animate-float-rotate {
+  animation: float-rotate 4s ease-in-out infinite;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  /* font-family: var(--font-poppins), var(--font-antonio), Arial, Helvetica, sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+.font-antonio {
+  font-family: "Antonio", sans-serif;
+}
+
+.font-inter {
+  font-family: "Inter", sans-serif;
+}
+
+.dm-sans {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: "100", "400", "500", "600";
+  font-style: normal;
+}
+
+/* src/app/globals.css */
+
+/* Custom styles for Swiper Navigation Arrows */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff !important; /* White color for arrows */
+  background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent background */
+  border-radius: 50%; /* Make them circular */
+  width: 44px !important;
+  height: 44px !important;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.6); /* Darker on hover */
+}
+
+/* Adjust arrow icon size */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px !important;
+  font-weight: 900;
+}
+
+/* Custom styles for Swiper Pagination Dots */
+.swiper-pagination-bullet {
+  background-color: rgba(255, 255, 255, 0.5) !important; /* Inactive dot color */
+  width: 10px !important;
+  height: 10px !important;
+  opacity: 1 !important;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ffffff !important; /* Active dot color */
+}
+
+.lightkMode {
+  background-color: white;
+  color: black;
+}
